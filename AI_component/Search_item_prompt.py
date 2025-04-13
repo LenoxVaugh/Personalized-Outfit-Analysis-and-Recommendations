@@ -4,7 +4,7 @@ import os
 
 load_dotenv("demo.env")
 api_key = os.getenv("openai_api_key")
-client = OpenAI(
+client = openai(
   api_key=api_key
 )
 
