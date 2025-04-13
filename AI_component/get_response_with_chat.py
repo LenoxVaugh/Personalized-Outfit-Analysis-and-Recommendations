@@ -33,17 +33,26 @@ def get_response_with_chat(prompt):
         if is_new_sdk:
             response = client.chat.completions.create(
                 model="gpt-3.5-turbo",
-                messages=[{"role": "user", "content": prompt}],
+                messages=[
+                    {"role": "system", "content": prompt},
+                    {"role": "user", "content": user_prompt}
+                ],
                 temperature=0.7
             )
             return response.choices[0].message.content
         else:
             response = client.ChatCompletion.create(
                 model="gpt-3.5-turbo",
-                messages=[{"role": "user", "content": prompt}],
+                messages=[
+                    {"role": "system", "content": prompt},
+                    {"role": "user", "content": user_prompt}
+                ],
                 temperature=0.7
             )
             return response.choices[0].message['content']
     except Exception as e:
         print(f"Error in get_response_with_chat: {str(e)}")
-        return "Sorry, there was an error processing your request."
+        return json.dumps({
+            "message": "Xin lỗi, đã xảy ra lỗi khi xử lý yêu cầu.",
+            "items": []
+        })
