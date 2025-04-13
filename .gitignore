@@ -1,0 +1,62 @@
+# === Python ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# === Environment & Config Files ===
+.env
+*.env
+config.json
+
+# === Virtual Environment ===
+venv/
+.venv/
+ENV/
+
+# === OS-generated files ===
+.DS_Store
+Thumbs.db
+
+# === Image & Uploads (optional) ===
+uploads/
+images/
+*.jpg
+*.jpeg
+*.png
+*.gif
+
+# === Cache & Temp Files ===
+*.log
+*.tmp
+*.pickle
+*.pkl
+
+# === WebDriver files (if any are generated) ===
+*.crdownload
+selenium-screenshots/
+*.webm
+
+# === Output or Results folders ===
+output/
+results/
+
+# === Database / Credentials ===
+*.db
+*.sqlite3
+*.psql
+database_credentials.json
+
+# === Node.js (in case you add frontend later) ===
+node_modules/
+dist/
+build/
+
+# === VSCode / Editor configs ===
+.vscode/
+.idea/
+
+# === Misc ===
+*.bak
+*.old
