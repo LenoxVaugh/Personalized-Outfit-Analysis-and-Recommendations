@@ -60,3 +60,6 @@ build/
 # === Misc ===
 *.bak
 *.old
+
+# === Model Files ===
+*.pth
