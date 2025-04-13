@@ -1,14 +1,15 @@
 import openai
 from dotenv import load_dotenv
-import json
 import os
 
 # Load environment variables
 load_dotenv("demo.env")
 
-# Get API key
-api_key = os.getenv("openai_api_key")
-client = openai(api_key=api_key)
+# Get API key from environment
+api_key = os.getenv("OPENAI_API_KEY")
+
+# Set API key
+openai.api_key = api_key
 
 prompt = """Bạn là chuyên gia tư vấn thời trang. Hãy trả lời mọi câu hỏi bằng tiếng Việt. 
 Đưa ra lời khuyên chi tiết và thực tế về cách phối đồ. Giọng điệu thân thiện và chuyên nghiệp.
