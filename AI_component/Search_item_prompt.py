@@ -5,8 +5,12 @@ import os
 load_dotenv("demo.env")
 
 # Sửa tên biến cho đúng
-api_key = os.getenv("OPENAI_API_KEY")
-client = OpenAI(api_key=api_key)
+try:
+    from openai import OpenAI
+    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+except ImportError:
+    import openai
+    openai.api_key = os.getenv("OPENAI_API_KEY")
 
 Prompt = """
 Bạn là chuyên gia thời trang (Fashion Expert). Nhiệm vụ của bạn là dựa trên mô tả trong caption của hình ảnh (nêu rõ trang phục, phụ kiện, giày dép…) và câu hỏi của người dùng, từ đó đề xuất thêm các món đồ thời trang mà người dùng có thể quan tâm và mua sắm online.
