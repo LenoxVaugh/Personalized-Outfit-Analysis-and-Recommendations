@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Outfit Insight</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap">
+  <style>
+    :root {
+      --primary-color: #ff6b6b;
+      --secondary-color: #ff8e8e;
+      --accent-color: #4a6fa5;
+      --light-color: #f9f9f9;
+      --dark-color: #333333;
+      --neutral-color: #546e7a;
+      --shadow: 0 8px 30px rgba(94, 94, 94, 0.02);
+      --border-radius: 20px;
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    body {
+      background-color: #f5f5f5;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e0e0e0' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      color: var(--dark-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding-bottom: 30px;
+    }
+    
+    .header {
+      width: 100%;
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      color: white;
+      padding: 25px 0;
+      text-align: center;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+      opacity: 0.5;
+    }
+    
+    .logo-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 5px;
+    }
+    
+    .logo-icon {
+      font-size: 28px;
+      margin-right: 12px;
+    }
+    
+    .main-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .main-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 25%;
+      width: 50%;
+      height: 3px;
+      background-color: rgba(255, 255, 255, 0.7);
+      border-radius: 3px;
+    }
+    
+    .tagline {
+      font-size: 14px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      margin-top: 8px;
+      opacity: 0.9;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 900px;
+      padding: 0 20px;
+      margin: 0 auto;
+    }
+    
+    .chat-container {
+      width: 100%;
+      height: calc(65vh - 80px);
+      display: flex;
+      flex-direction: column;
+      background-color: rgb(255, 255, 255);
+      border-radius: var(--border-radius) var(--border-radius) 0 0;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    
+    .chat-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 150px;
+      width: 150px;
+      background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, transparent 70%);
+      border-radius: 0 0 0 100%;
+    }
+    
+    .chat-header {
+      display: flex;
+      align-items: center;
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .bot-avatar {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 24px;
+      margin-right: 15px;
+      margin-left: 10px;
+      margin-top: 10px;
+      box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
+    }
+    
+    .bot-info {
+      flex: 1;
+    }
+    
+    .bot-name {
+      font-weight: 600;
+      font-size: 18px;
+      color: var(--dark-color);
+    }
+    
+    .bot-status {
+      font-size: 12px;
+      color: #4caf50;
+      display: flex;
+      align-items: center;
+    }
+    
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #4caf50;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+    
+    .fashion-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+    
+    .fashion-tag {
+      font-size: 12px;
+      padding: 6px 12px;
+      background-color: rgba(255, 107, 107, 0.1);
+      color: var(--primary-color);
+      border-radius: 20px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .fashion-tag:hover {
+      background-color: rgba(255, 107, 107, 0.2);
+      transform: translateY(-2px);
+    }
+    
+    .fashion-tag i {
+      margin-right: 5px;
+    }
+    
+    .chat-messages {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 25px 25px 0;
+      display: flex;
+      flex-direction: column;
+      scroll-behavior: smooth;
+    }
+    
+    .chat-messages::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .chat-messages::-webkit-scrollbar-track {
+      background: #f9f9f9;
+      border-radius: 10px;
+    }
+    
+    .chat-messages::-webkit-scrollbar-thumb {
+      background: #e0e0e0;
+      border-radius: 10px;
+    }
+    
+    .chat-messages::-webkit-scrollbar-thumb:hover {
+      background: #ccc;
+    }
+    
+    .input-area {
+    background-color: rgb(255, 255, 255);
+    padding: 15px 25px 25px;
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+    margin-top: -1px; /* Thêm dòng này để xóa khoảng cách */
+    box-shadow: var(--shadow);
+    }
+    
+    .input-container {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      padding: 10px 20px;
+      background-color: rgb(255, 255, 255);
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+      min-height: 60px;
+      overflow: hidden;
+      gap: 10px;
+    }
+    
+    .input-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      background-color: rgb(255, 255, 255);
+    }
+
+    .input-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background-color: white;
+    }
+    
+    .input-container:focus-within {
+      box-shadow: 0 6px 24px rgba(255, 107, 107, 0.15);
+      border-color: rgba(255, 107, 107, 0.3);
+      transform: translateY(-2px);
+    }
+    
+    .upload-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--neutral-color);
+      border-radius: 50%;
+      flex-shrink: 0;
+      order: 0;
+    }
+    
+    .upload-btn:hover {
+      background-color: rgba(255, 107, 107, 0.1);
+      color: var(--primary-color);
+      transform: scale(1.05);
+    }
+    
+    .message-input {
+      flex-grow: 1;
+      background: none;
+      border: none;
+      color: var(--dark-color);
+      font-size: 16px;
+      padding: 12px 15px;
+      outline: none;
+      resize: none;
+      overflow: hidden;
+      line-height: 1.5;
+      min-width: 50px;
+    }
+    
+    .message-input::placeholder {
+      color: #9e9e9e;
+      font-weight: 400;
+    }
+    
+    .send-btn {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+      order: 3;
+      margin-left: auto;
+    }
+    
+    .send-btn:hover {
+      transform: scale(1.05) rotate(5deg);
+      box-shadow: 0 6px 18px rgba(255, 107, 107, 0.4);
+    }
+    
+    .send-btn:active {
+      transform: scale(0.95);
+    }
+    
+    #fileInput {
+      display: none;
+    }
+    
+    .message {
+      margin: 10px 0;
+      padding: 16px 20px;
+      border-radius: 20px;
+      line-height: 1.5;
+      word-wrap: break-word;
+      display: inline-block;
+      max-width: 80%;
+      position: relative;
+      animation: fadeIn 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      font-size: 15px;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .bot-message {
+      background-color: #f8f9fa;
+      align-self: flex-start;
+      border-bottom-left-radius: 5px;
+      color: var(--dark-color);
+      border-left: 3px solid var(--primary-color);
+    }
+    
+    .bot-message::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -10px;
+      width: 20px;
+      height: 20px;
+      background-color: #f8f9fa;
+      border-radius: 50%;
+      z-index: -1;
+    }
+    
+    .user-message {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      align-self: flex-end;
+      border-bottom-right-radius: 5px;
+      color: white;
+    }
+    
+    .user-message::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: -10px;
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      border-radius: 50%;
+      z-index: -1;
+    }
+    
+    .message-time {
+      font-size: 11px;
+      margin-top: 5px;
+      opacity: 0.7;
+      text-align: right;
+    }
+    
+    .image-preview {
+      max-width: 250px;
+      border-radius: 12px;
+      display: block;
+      margin-top: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .image-preview:hover {
+      transform: scale(1.03);
+    }
+
+    .preview-image {
+      max-width: 55px;
+      max-height: 55px;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .preview-image:hover {
+      transform: scale(1.05);
+    }
+    
+    .preview-wrapper {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      margin-right: 5px;
+    }
+    
+    .remove-preview {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: white;
+      color: var(--primary-color);
+      border: none;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      z-index: 1;
+      transition: var(--transition);
+    }
+    
+    .remove-preview:hover {
+      background-color: var(--primary-color);
+      color: white;
+      transform: scale(1.1);
+    }
+    
+    .search-results {
+      margin-top: 15px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 15px;
+      padding: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+    
+    .result-item {
+      display: flex;
+      align-items: center;
+      padding: 10px 15px;
+      margin: 5px 0;
+      color: var(--dark-color);
+      text-decoration: none;
+      border-radius: 12px;
+      transition: var(--transition);
+      background-color: rgba(255, 107, 107, 0.03);
+    }
+    
+    .result-item:hover {
+      background-color: rgba(255, 107, 107, 0.1);
+      transform: translateX(5px);
+    }
+    
+    .result-item i {
+      margin-right: 8px;
+      color: var(--primary-color);
+    }
+    
+    .typing-indicator {
+      display: flex;
+      align-items: center;
+      padding: 12px 15px;
+      background-color: #f8f9fa;
+      border-radius: 18px;
+      width: fit-content;
+      margin: 8px 0;
+      align-self: flex-start;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+    
+    .typing-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--primary-color);
+      border-radius: 50%;
+      margin: 0 2px;
+      opacity: 0.6;
+      animation: typingAnimation 1.4s infinite ease-in-out;
+    }
+    
+    .typing-dot:nth-child(1) { animation-delay: 0s; }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    
+    @keyframes typingAnimation {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-5px); }
+    }
+    
+    .fashion-suggestions {
+      margin-top: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    .suggestion-chip {
+      padding: 8px 15px;
+      background-color: white;
+      color: var(--neutral-color);
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+    }
+    
+    .suggestion-chip:hover {
+      background-color: var(--primary-color);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 107, 107, 0.2);
+    }
+    
+    .suggestion-chip i {
+      margin-right: 6px;
+    }
+    
+    .footer {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 12px;
+      color: #9e9e9e;
+    }
+    
+    @media (max-width: 768px) {
+      .chat-container {
+        height: calc(85vh - 100px);
+        padding: 15px;
+        margin-bottom: 0;
+      }
+      
+      .message {
+        max-width: 85%;
+        padding: 12px 15px;
+        font-size: 14px;
+      }
+      
+      .input-container {
+        padding: 8px 15px;
+      }
+      
+      .image-preview {
+        max-width: 200px;
+      }
+      
+      .fashion-tags {
+        display: none;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .main-title {
+        font-size: 24px;
+      }
+      
+      .chat-container {
+        padding: 12px;
+        height: 58vh;
+      }
+      
+      .bot-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+      }
+      
+      .message {
+        max-width: 90%;
+        padding: 12px 15px;
+        font-size: 14px;
+      }
+      
+      .image-preview {
+        max-width: 180px;
+      }
+    }
+
+    /* CSS cho loading bar mới */
+    .bot-loading-container {
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .bot-loading-bar {
+      background-color: rgba(255, 107, 107, 0.1);
+      height: 4px;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bot-loading-progress {
+      height: 100%;
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      position: absolute;
+      left: 0;
+      top: 0;
+      transition: width 0.3s ease;
+    }
+
+    .bot-loading-text {
+      font-size: 12px;
+      color: var(--neutral-color);
+      margin-top: 4px;
+      text-align: right;
+    }
+
+    /* CSS cho typing animation */
+    @keyframes cursor-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .bot-message.typing {
+      position: relative;
+    }
+
+    .bot-message.typing::after {
+      content: '|';
+      position: relative;
+      display: inline-block;
+      margin-left: 2px;
+      animation: cursor-blink 1s infinite;
+      color: var(--primary-color);
+    }
+
+    /* CSS cho circle loading thay thế typing dots */
+    .circle-loading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 15px;
+      background-color: #f8f9fa;
+      border-radius: 18px;
+      width: fit-content;
+      margin: 8px 0;
+      align-self: flex-start;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .circle-progress {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: conic-gradient(var(--primary-color) 0%, #f3f3f3 0%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .circle-progress::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #f8f9fa;
+    }
+
+    .circle-text {
+      font-size: 12px;
+      color: var(--dark-color);
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="container">
+      <div class="logo-container">
+        <i class="fas fa-tshirt logo-icon"></i>
+        <h1 class="main-title">Outfit Insight</h1>
+      </div>
+      <p class="tagline">Phân tích và đề xuất trang phục cá nhân</p>
+    </div>
+  </div>
+  
+  <div class="container">
+    <div class="chat-container">
+      <div class="chat-header">
+        <div class="bot-avatar">
+          <i class="fas fa-tshirt"></i>
+        </div>
+        <div class="bot-info">
+          <div class="bot-name">Trợ Lý Trang Phục</div>
+          <div class="bot-status">
+            <span class="status-dot"></span>
+            Đang hoạt động
+          </div>
+        </div>
+      </div>
+      
+      <div class="fashion-tags">
+        <div class="fashion-tag"><i class="fas fa-magic"></i> Phong cách đơn giản</div>
+        <div class="fashion-tag"><i class="fas fa-briefcase"></i> Đi làm thật phong cách</div>
+        <div class="fashion-tag"><i class="fas fa-glass-cheers"></i> Dự tiệc</div>
+        <div class="fashion-tag"><i class="fas fa-shopping-bag"></i> Xu hướng mới</div>
+      </div>
+      
+      <div class="chat-messages" id="chatContainer">
+        <div class="message bot-message">
+          Chào bạn! Tôi là trợ lý thời trang thông minh. Hãy cho tôi biết bạn đang tìm kiếm gợi ý trang phục như thế nào hoặc chia sẻ ảnh phong cách bạn yêu thích.
+          <div class="message-time"id="initialMessageTime"></div>
+        </div>
+        
+        <div class="fashion-suggestions">
+          <div class="suggestion-chip"><i class="fas fa-tshirt"></i> Trang phục đi làm</div>
+          <div class="suggestion-chip"><i class="fas fa-user-tie"></i> Phong cách công sở</div>
+          <div class="suggestion-chip"><i class="fas fa-cocktail"></i> Dự tiệc</div>
+          <div class="suggestion-chip"><i class="fas fa-hiking"></i> Dã ngoại</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="input-area">
+      <div class="input-container" id="inputContainer">
+        <div class="input-content">
+          <!-- Khu vực preview sẽ được thêm vào đây -->
+        </div>
+        <div class="input-actions">
+          <label for="fileInput" class="upload-btn">
+            <i class="fas fa-camera"></i>
+          </label>
+          <input type="file" id="fileInput" accept="image/*">
+          <input type="text" class="message-input" id="messageInput" placeholder="Hỏi về phong cách thời trang của bạn...">
+          <button class="send-btn" id="sendBtn">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+      © 2025 Outfit Insight • Trợ lý thời trang
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const chatContainer = document.getElementById('chatContainer');
+      const messageInput = document.getElementById('messageInput');
+      const fileInput = document.getElementById('fileInput');
+      const sendBtn = document.getElementById('sendBtn');
+      const inputContainer = document.getElementById('inputContainer');
+      const initialMessageTime = document.getElementById('initialMessageTime');
+      if (initialMessageTime) {
+        initialMessageTime.textContent = getCurrentTime();
+    }
+      let pendingImage = null; // Biến để lưu ảnh đang chờ gửi
+      let previewElement = null; // Biến để lưu phần tử preview
+      
+      // Thêm sự kiện vào các suggestion chips
+      document.querySelectorAll('.suggestion-chip').forEach(chip => {
+        chip.addEventListener('click', function() {
+          messageInput.value = this.textContent.trim();
+          messageInput.focus();
+        });
+      });
+      
+      // Thêm sự kiện vào các fashion tags
+      document.querySelectorAll('.fashion-tag').forEach(tag => {
+        tag.addEventListener('click', function() {
+          messageInput.value = this.textContent.trim();
+          messageInput.focus();
+        });
+      });
+
+      // Hiển thị typing indicator
+      function showTypingIndicator() {
+        const loadingDiv = document.createElement('div');
+        loadingDiv.className = 'circle-loading';
+        loadingDiv.id = 'typingIndicator';
+        
+        const circleProgress = document.createElement('div');
+        circleProgress.className = 'circle-progress';
+        
+        const percentText = document.createElement('div');
+        percentText.className = 'circle-text';
+        percentText.textContent = '0%';
+        
+        loadingDiv.appendChild(circleProgress);
+        loadingDiv.appendChild(percentText);
+        
+        chatContainer.appendChild(loadingDiv);
+        scrollToBottom();
+
+        // Animation cho circle progress
+        let percent = 0;
+        const interval = setInterval(() => {
+            // Giảm tốc độ tăng percent xuống còn 0.5% thay vì 1%
+            percent += 0.5;
+            if (percent > 100) {
+                clearInterval(interval);
+            }
+            circleProgress.style.background = `conic-gradient(var(--primary-color) ${percent}%, #f3f3f3 ${percent}%)`;
+            percentText.textContent = `${Math.min(Math.round(percent), 100)}%`;
+        }, 200); // Tăng delay lên 200ms
+
+        return {
+            element: loadingDiv,
+            stop: () => {
+                clearInterval(interval);
+                // Đảm bảo hiển thị 100% khi kết thúc
+                circleProgress.style.background = `conic-gradient(var(--primary-color) 100%, #f3f3f3 0%)`;
+                percentText.textContent = '100%';
+                // Tăng delay trước khi xóa
+                setTimeout(() => {
+                    loadingDiv.remove();
+                }, 500);
+            }
+        };
+    }
+
+      // Tự động điều chỉnh chiều cao của messageInput
+      function adjustInputHeight() {
+        messageInput.style.height = 'auto'; // Reset chiều cao
+        messageInput.style.height = `${Math.min(messageInput.scrollHeight, 120)}px`; // Điều chỉnh chiều cao dựa trên nội dung
+        inputContainer.style.height = 'auto'; // Cho phép input-container giãn ra
+      }
+
+      // Thêm thời gian vào tin nhắn
+      function getCurrentTime() {
+        const now = new Date();
+        let hours = now.getHours();
+        let minutes = now.getMinutes();
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        
+        // Sửa lại logic xử lý giờ
+        hours = hours % 12;
+        hours = hours || 12; // Nếu hours = 0 thì gán thành 12
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        
+        return hours + ':' + minutes + ' ' + ampm;
+      }
+
+      // Gửi tin nhắn hoặc ảnh tới backend
+      async function sendMessage() {
+        const message = messageInput.value.trim();
+        const currentPendingImage = pendingImage;
+
+        // Clear inputs immediately
+        messageInput.value = '';
+        if (previewElement) {
+          previewElement.remove();
+          previewElement = null;
+        }
+        pendingImage = null;
+        fileInput.value = '';
+        adjustInputHeight();
+        messageInput.focus();
+
+        if (currentPendingImage || message) {
+          if (currentPendingImage) {
+            const imageMessageDiv = document.createElement('div');
+            imageMessageDiv.classList.add('message', 'user-message');
+            
+            const img = document.createElement('img');
+            img.classList.add('image-preview');
+            const reader = new FileReader();
+            
+            reader.onload = async function(e) {
+              img.src = e.target.result;
+              imageMessageDiv.appendChild(img);
+              chatContainer.appendChild(imageMessageDiv);
+
+              if (message) {
+                const textMessageDiv = document.createElement('div');
+                textMessageDiv.classList.add('message', 'user-message');
+                textMessageDiv.textContent = message;
+                chatContainer.appendChild(textMessageDiv);
+              }
+              scrollToBottom();
+
+              const typingIndicator = showTypingIndicator();
+
+              try {
+                const formData = new FormData();
+                formData.append('image', currentPendingImage);
+                if (message) formData.append('message', message);
+
+                const response = await fetch('http://localhost:5000/api/upload', {
+                  method: 'POST',
+                  body: formData
+                });
+                const data = await response.json();
+                typingIndicator.stop(); // Dừng animation
+                typingIndicator.element.remove(); // Xóa element
+                addMessage(data.response, 'bot', data.search_results);
+              } catch (error) {
+                console.error('Error:', error);
+                typingIndicator.stop();
+                typingIndicator.element.remove();
+                addMessage('Có lỗi khi xử lý yêu cầu!', 'bot');
+              }
+            };
+            reader.readAsDataURL(currentPendingImage);
+          } else if (message) {
+            const textMessageDiv = document.createElement('div');
+            textMessageDiv.classList.add('message', 'user-message');
+            textMessageDiv.textContent = message;
+            chatContainer.appendChild(textMessageDiv);
+            scrollToBottom();
+
+            const typingIndicator = showTypingIndicator();
+
+            try {
+              const response = await fetch('http://localhost:5000/api/message', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message })
+              });
+              const data = await response.json();
+              typingIndicator.stop(); // Dừng animation
+              typingIndicator.element.remove(); // Xóa element
+              addMessage(data.response, 'bot', data.search_results);
+            } catch (error) {
+              console.error('Error:', error);
+              typingIndicator.stop();
+              typingIndicator.element.remove();
+              addMessage('Có lỗi xảy ra khi xử lý tin nhắn!', 'bot');
+            }
+          }
+        }
+      }
+
+      // Xử lý chọn ảnh từ file input
+      fileInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file && file.type.startsWith('image/')) {
+          pendingImage = file; // Lưu file để gửi sau
+          const reader = new FileReader();
+          reader.onload = function(e) { addImagePreview(e.target.result); };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      // Xử lý paste ảnh từ clipboard
+      document.addEventListener('paste', function(event) {
+        const items = (event.clipboardData || event.originalEvent.clipboardData).items;
+        for (let i = 0; i < items.length; i++) {
+          if (items[i].type.indexOf('image') !== -1) {
+            const blob = items[i].getAsFile();
+            pendingImage = blob; // Lưu blob để gửi sau
+            const reader = new FileReader();
+            reader.onload = function(e) { addImagePreview(e.target.result); };
+            reader.readAsDataURL(blob);
+            break;
+          }
+        }
+      });
+
+      // Thêm ảnh preview phía trên thanh chatbox
+      function addImagePreview(src) {
+    if (previewElement) {
+        previewElement.remove();
+    }
+
+    previewElement = document.createElement('div');
+    previewElement.className = 'preview-wrapper';
+
+    const img = document.createElement('img');
+    img.src = src;
+    img.classList.add('preview-image');
+
+    const removeBtn = document.createElement('button');
+    removeBtn.className = 'remove-preview';
+    removeBtn.innerHTML = '<i class="fas fa-times"></i>';
+    removeBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        pendingImage = null;
+        previewElement.remove();
+        previewElement = null;
+        fileInput.value = '';
+    });
+
+    previewElement.appendChild(img);
+    previewElement.appendChild(removeBtn);
+
+    const inputContent = inputContainer.querySelector('.input-content');
+    if (inputContent) {
+        inputContent.appendChild(previewElement);
+    } else {
+        const newInputContent = document.createElement('div');
+        newInputContent.className = 'input-content';
+        inputContainer.insertBefore(newInputContent, inputContainer.firstChild);
+        newInputContent.appendChild(previewElement);
+    }
+}
+
+
+      // Thêm tin nhắn văn bản hoặc link vào chat (cho bot)
+      function addMessage(text, sender, searchResults = []) {
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('message', sender + '-message');
+    
+    if (sender === 'bot') {
+        // Container cho nội dung tin nhắn
+        const contentDiv = document.createElement('div');
+        messageDiv.appendChild(contentDiv);
+        
+        // Thêm tin nhắn vào chat trước
+        chatContainer.appendChild(messageDiv);
+        scrollToBottom();
+
+        // Hiệu ứng typing cho text
+        messageDiv.classList.add('typing');
+        let currentText = '';
+        let currentIndex = 0;
+        
+        const typeWriter = () => {
+            if (currentIndex < text.length) {
+                currentText += text.charAt(currentIndex);
+                contentDiv.textContent = currentText;
+                currentIndex++;
+                scrollToBottom();
+                // Giảm thời gian delay xuống, random từ 10-30ms thay vì 20-70ms
+                setTimeout(typeWriter, Math.random() * 20 + 10);
+            } else {
+                messageDiv.classList.remove('typing');
+                
+                // Thêm loading bar container sau khi typing xong
+                const loadingContainer = document.createElement('div');
+                loadingContainer.className = 'bot-loading-container';
+                const loadingBar = document.createElement('div');
+                loadingBar.className = 'bot-loading-bar';
+                const progress = document.createElement('div');
+                progress.className = 'bot-loading-progress';
+                const loadingText = document.createElement('div');
+                loadingText.className = 'bot-loading-text';
+                
+                loadingBar.appendChild(progress);
+                loadingContainer.appendChild(loadingBar);
+                loadingContainer.appendChild(loadingText);
+                messageDiv.appendChild(loadingContainer);
+
+                // Loading animation
+                let percent = 0;
+                const interval = setInterval(() => {
+                    percent += Math.random() * 15;
+                    if (percent > 100) {
+                        percent = 100;
+                        clearInterval(interval);
+                        setTimeout(() => {
+                            loadingContainer.remove();
+                            
+                            // Thêm search results
+                            if (searchResults && searchResults.length > 0) {
+                                const resultsDiv = document.createElement('div');
+                                resultsDiv.classList.add('search-results');
+                                
+                                const resultsHeading = document.createElement('h4');
+                                resultsHeading.textContent = 'Sản phẩm gợi ý:';
+                                resultsHeading.style.marginBottom = '8px';
+                                resultsHeading.style.color = '#666';
+                                resultsDiv.appendChild(resultsHeading);
+                                
+                                searchResults.forEach(result => {
+                                    if (result.results && result.results.length > 0) {
+                                        result.results.forEach(item => {
+                                            const link = document.createElement('a');
+                                            link.href = item.link || '#';
+                                            link.textContent = `${item.title} - ${item.price || 'Liên hệ'}`;
+                                            link.className = 'result-item';
+                                            link.target = '_blank';
+                                            resultsDiv.appendChild(link);
+                                        });
+                                    }
+                                });
+                                messageDiv.appendChild(resultsDiv);
+                            }
+                            
+                            // Thêm timestamp
+                            const timeDiv = document.createElement('div');
+                            timeDiv.className = 'message-time';
+                            timeDiv.textContent = getCurrentTime();
+                            messageDiv.appendChild(timeDiv);
+                            scrollToBottom();
+                        }, 500);
+                    }
+                    progress.style.width = `${percent}%`;
+                    loadingText.textContent = `${Math.round(percent)}%`;
+                }, 100);
+            }
+        };
+        
+        // Bắt đầu hiệu ứng typing
+        typeWriter();
+    } else {
+        messageDiv.textContent = text;
+        const timeDiv = document.createElement('div');
+        timeDiv.className = 'message-time';
+        timeDiv.textContent = getCurrentTime();
+        messageDiv.appendChild(timeDiv);
+        chatContainer.appendChild(messageDiv);
+        scrollToBottom();
+    }
+}
+
+      // Cuộn xuống cuối chat
+      function scrollToBottom() {
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      }
+
+      // Sự kiện gửi tin nhắn
+      sendBtn.addEventListener('click', sendMessage);
+      messageInput.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter' && !event.shiftKey) { // Shift + Enter để xuống dòng
+          event.preventDefault();
+          sendMessage();
+        }
+      });
+
+      // Điều chỉnh chiều cao của messageInput khi nhập
+      messageInput.addEventListener('input', adjustInputHeight);
+
+      // Khởi tạo chiều cao ban đầu
+      adjustInputHeight();
+      
+      // Auto focus vào input khi trang load xong
+      setTimeout(() => {
+        messageInput.focus();
+      }, 500);
+    });
+  </script>
+</body>
+</html>
